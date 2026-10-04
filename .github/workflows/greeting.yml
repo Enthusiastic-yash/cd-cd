@@ -1,0 +1,9 @@
+name: greeting
+on: push
+
+jobs:
+  greet:
+    runs-on: ubunto-latest
+    steps:
+      - name: "Greet User"
+        run: echo "Hello world"
