@@ -1,8 +1,17 @@
 name: Deploy
-on: [push, workflow_dispatch]
+# on: [push, workflow_dispatch]
+on:
+  push:
+    branches: ["main", "feature/**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -23,6 +32,21 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Deploy
-        run: echo "deploy successfully"
+      - name: upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-file
+          path: ./dist
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
