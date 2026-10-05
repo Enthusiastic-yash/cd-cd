@@ -47,6 +47,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: dist-file
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
