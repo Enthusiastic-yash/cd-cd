@@ -8,7 +8,7 @@ describe("App", () => {
 
     // Verify h1 tag exists and contains expected text
     const heading = wrapper.find("h1");
-    expect(heading.exists()).toBe(true);
+    expect(heading.exists()).not.toBe(true);
     expect(heading.text()).toBe("You did it!");
 
     // Verify p tag exists and contains expected text
