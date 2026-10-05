@@ -1,15 +1,19 @@
 import { describe, it, expect } from "vitest";
-
 import { mount } from "@vue/test-utils";
 import App from "../App.vue";
 
 describe("App", () => {
-  const wrapper = mount(App);
-  it("mounts renders properly", () => {
-    expect(wrapper.text()).toContain("You did it!");
-  });
+  it("renders properly with heading and paragraph", () => {
+    const wrapper = mount(App);
 
-  it("containe p tag", () => {
-    expect(wrapper.text()).toContain("p");
+    // Verify h1 tag exists and contains expected text
+    const heading = wrapper.find("h1");
+    expect(heading.exists()).toBe(true);
+    expect(heading.text()).toBe("You did it!");
+
+    // Verify p tag exists and contains expected text
+    const paragraph = wrapper.find("p");
+    expect(paragraph.exists()).not.toBe(true);
+    expect(paragraph.text()).toBe("This is a Vue app");
   });
 });
