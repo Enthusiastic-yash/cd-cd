@@ -13,7 +13,7 @@ describe("App", () => {
 
     // Verify p tag exists and contains expected text
     const paragraph = wrapper.find("p");
-    expect(paragraph.exists()).not.toBe(true);
+    expect(paragraph.exists()).toBe(true);
     expect(paragraph.text()).toBe("This is a Vue app");
   });
 });
